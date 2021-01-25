@@ -5,13 +5,10 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 export default function AddListForm(props){
   const [selectedFile, setSelectedFile] = useState('')
   const [state, setState] = useState({
-    caption: ''
+    ListItem: ''
   })
 
-  function handleFileInput(e){
-    setSelectedFile(e.target.files[0])
-  }
-
+  
 
   function handleChange(e){
     setState({
@@ -24,8 +21,7 @@ export default function AddListForm(props){
     e.preventDefault()
              
     const formData = new FormData()
-    formData.append('photo', selectedFile)
-    formData.append('caption', state.caption)
+    formData.append('ListItem', state.ListItem)
     props.handleAddList(formData)
     // Have to submit the form now! We need a function!
   }
@@ -42,22 +38,15 @@ export default function AddListForm(props){
                   className="form-control"
                   name="caption"
                   value={state.caption}
-                  placeholder="What's your favorite Anime"
+                  placeholder="What's your favorite Anime?"
                   onChange={handleChange}
                   required
-              />   
-              <Form.Input
-                className="form-control"
-                type="file"
-                name="photo"
-                placeholder="upload image"
-                onChange={handleFileInput}
-              />   
+              />    
               <Button
                 type="submit"
                 className="btn"
               >
-                ADD List
+                ADD LIST
               </Button>
             </Form>
           </Segment>

@@ -3,9 +3,11 @@ import tokenService from './tokenService';
 const BASE_URL = '/api/users/';
 
 function signup(user) {
+  console.log(user)
   return fetch(BASE_URL + 'signup', {
+    headers: new Headers({'Content-Type': 'application/json'}),
     method: 'POST',
-    body: user
+    body: JSON.stringify(user)
   })
   .then(res => {
     if (res.ok) return res.json();
@@ -28,6 +30,7 @@ function logout() {
 
 function login(creds) {
   return fetch(BASE_URL + 'login', {
+    headers: new Headers({'Content-Type': 'application/json'}),
     method: 'POST',
     body: JSON.stringify(creds)
   })

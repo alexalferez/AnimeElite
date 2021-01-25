@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image, Feed } from 'semantic-ui-react'
+import { List, Icon, Image, Feed } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function ListCard({list, isProfile, user, addLike, removeLike}) { 
@@ -17,33 +17,33 @@ function ListCard({list, isProfile, user, addLike, removeLike}) {
 
 
   return (
-    <Card key={list._id}>
+    <List key={list._id}>
      {isProfile ? ''
         :  
         <Link to={`/${user.username}`}>
-          <Card.Content textAlign='left'>
+          <List.Content textAlign='left'>
               <Image
                   floated='left'
                   size='large'
                   avatar
                   src={'https://react.semantic-ui.com/images/wireframe/square-image.png'}
               />
-              <Card.Header floated="right">{list.user.username}</Card.Header>
-          </Card.Content>
+              <List.Header floated="right">{list.user.username}</List.Header>
+          </List.Content>
         </Link>
       }
       <Image src={`${list.photoUrl}`} wrapped ui={false} />
-      <Card.Content>
-      <Card.Description>
-        {list.caption}
-      </Card.Description>
-      </Card.Content>
-      <Card.Content extra textAlign={'right'}>
+      <List.Content>
+      <List.Description>
+      <List.Item>1</List.Item>
+      </List.Description>
+      </List.Content>
+      <List.Content extra textAlign={'right'}>
         <Icon name={'heart'} size='large' color={likeColor} onClick={clickHandler} />
         {list.likes.length} Likes
           
-      </Card.Content>
-    </Card>
+      </List.Content>
+    </List>
   );
 }
 

@@ -11,7 +11,7 @@ module.exports = {
 async function signup(req, res) {
   console.log(req.body, req.file)
 
-  const user = new User({...req.body});
+  const user = new User(req.body);
   try {
     await user.save();
     const token = createJWT(user);
@@ -20,7 +20,7 @@ async function signup(req, res) {
     // Probably a duplicate email
     res.status(400).json(err);
   }
-}
+}  
 
 async function login(req, res) {
   console.log(req.body)
@@ -28,7 +28,7 @@ async function login(req, res) {
     const user = await User.findOne({email: req.body.email});
     console.log(user, ' this user', !user, !!user)
     if (!user) return res.status(401).json({err: 'bad credentials'});
-    user.comparePassword(req.body.pw, (err, isMatch) => {
+    user.comparePassword(req.body.password, (err, isMatch) => {
       
       if (isMatch) {
         const token = createJWT(user);

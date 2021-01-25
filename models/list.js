@@ -7,7 +7,7 @@ const likesSchema = mongoose.Schema({
 
 const listSchema = new mongoose. Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    caption: String,
+    ListItem: String,
     likes: [likesSchema]
 })
 

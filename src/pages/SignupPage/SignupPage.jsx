@@ -29,8 +29,9 @@ export default function SignUpPage(props){
   async function handleSubmit(e){
     // add this later
     e.preventDefault()
-        console.log(state, ' this is state')
+        
         try {
+          console.log(state, ' this is state')
             await userService.signup(state);
             props.handleSignUpOrLogin()
             history.push('/')

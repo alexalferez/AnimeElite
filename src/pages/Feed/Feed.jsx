@@ -79,7 +79,7 @@ export default function Feed({user, handleLogout}){
         </Grid.Row>
         <Grid.Row>
         <Grid.Column style={{maxWidth: 450}}>
-          <ListFeed lists={lists} isProfile={false} numPhotosCol={1} user={user} addLike={addLike} removeLike={removeLike}/>
+          <ListFeed lists={lists} isProfile={false} user={user} addLike={addLike} removeLike={removeLike}/>
         </Grid.Column>
         </Grid.Row>
       </Grid>
