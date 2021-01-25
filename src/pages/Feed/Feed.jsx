@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PageHeader from '../../components/Header/Header';
-import ListFeed from '../../components/ListFeed/ListFeed';
-import AddListForm from '../../components/AddListForm/AddListForm';
-import * as listsAPI from '../../utils/listService';
+import PostFeed from '../../components/PostFeed/PostFeed';
+import AddPostForm from '../../components/AddPostForm/AddPostForm';
+import * as postsAPI from '../../utils/postService';
 import * as likesAPI from '../../utils/likesService';
 import {  Grid } from 'semantic-ui-react'
 
 export default function Feed({user, handleLogout}){  
 
-    const [lists, setLists] = useState([])
+    const [posts, setPosts] = useState([])
 
-    async function handleAddList(list){
+    async function handleAddPost(post){
 
-        const data = await listsAPI.create(list);
+        const data = await postsAPI.create(post);
 
         // to check to make sure this is working
         console.log(data, ' data')
@@ -21,27 +21,27 @@ export default function Feed({user, handleLogout}){
         // data is the response from our create function in controllers/posts
         // update the state
 
-        setLists([data.list,  ...lists])
+        setPosts([data.post,  ...posts])
         // to conifrm this check the devtools for your feed component
         
     }
 
     // Maybe we need to call a funciton that gets all the posts
-    async function getLists(){
+    async function getPosts(post){
     
         try {
-          const data = await listsAPI.getAll();
-          setLists([...data.lists])
+          const data = await postsAPI.getAll();
+          setPosts([...data.post])
         } catch(err){
           console.log(err, ' this is the error')
         }
       }
 
-      async function addLike(listId){
+      async function addLike(postId){
         try {
-          const data = await likesAPI.create(listId);
+          const data = await likesAPI.create(postId);
           console.log(data, ' this is from addLike')
-          getLists()
+          getPosts()
         } catch(err){
           console.log(err)
         }
@@ -50,14 +50,14 @@ export default function Feed({user, handleLogout}){
       async function removeLike(likeId){
         try {
           const data = await likesAPI.removeLike(likeId);
-          getLists();
+          getPosts();
         } catch(err){
           console.log(err)
         }
       }
 
       useEffect(() => {
-        getLists()
+        getPosts()
       }, [])
 
       
@@ -74,12 +74,12 @@ export default function Feed({user, handleLogout}){
         </Grid.Row>
         <Grid.Row>
           <Grid.Column style={{ maxWidth: 450 }}>
-            <AddListForm handleAddList={handleAddList}/>
+            <AddPostForm handleAddPost={handleAddPost}/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
         <Grid.Column style={{maxWidth: 450}}>
-          <ListFeed lists={lists} isProfile={false} user={user} addLike={addLike} removeLike={removeLike}/>
+          <PostFeed posts={posts} isProfile={false} numPhotosCol={1} user={user} addLike={addLike} removeLike={removeLike}/>
         </Grid.Column>
         </Grid.Row>
       </Grid>

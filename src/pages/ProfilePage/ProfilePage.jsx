@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Segment, Dimmer, Loader } from 'semantic-ui-react'
 import userService from '../../utils/userService';
-import ListFeed from '../../components/ListFeed/ListFeed';
+import PostFeed from '../../components/PostFeed/PostFeed';
 import PageHeader from '../../components/Header/Header';
 import * as likesAPI from '../../utils/likesService';
 import { useLocation } from 'react-router-dom';
 
 export default function ProfilePage({ user, handleLogout }) {
 
-    const [lists, setLists] = useState([])
+    const [posts, setPosts] = useState([])
     const [profileUser, setProfileUser] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState('')
@@ -21,13 +21,12 @@ export default function ProfilePage({ user, handleLogout }) {
         try {
 
             const username = location.pathname.substring(1)
-            // location.pathname returns /jimbo so we need to cut off the / using the js method substring
             // This gets the username from the url! 
             console.log(username)
             const data = await userService.getProfile(username);
             console.log(data)
             setLoading(() => false)
-            setLists(() => [...data.lists])
+            setPosts(() => [...data.posts])
             setProfileUser(() => data.user)
         } catch (err) {
             console.log(err)
@@ -36,9 +35,9 @@ export default function ProfilePage({ user, handleLogout }) {
     }
 
 
-    async function addLike(listId) {
+    async function addLike(postId) {
         try {
-            const data = await likesAPI.create(listId);
+            const data = await likesAPI.create(postId);
             console.log(data, ' this is from addLike')
             getProfile()
         } catch (err) {
@@ -85,7 +84,7 @@ export default function ProfilePage({ user, handleLogout }) {
                     </Grid.Row>
                     <Grid.Row centered>
                         <Grid.Column style={{ maxWidth: 750 }}>
-                            <ListFeed isProfile={true} lists={lists} numPhotosCol={3} addLike={addLike} removeLike={removeLike} user={user} />
+                            <PostFeed isProfile={true} posts={posts} numPhotosCol={3} addLike={addLike} removeLike={removeLike} user={user} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

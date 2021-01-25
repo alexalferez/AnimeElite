@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-import { Button, Form, Segment } from 'semantic-ui-react'
+import { Button, Form, Segment, Grid } from 'semantic-ui-react'
 
-export default function AddListForm(props){
-  const [selectedFile, setSelectedFile] = useState('')
+export default function AddAnimeForm(props){
   const [state, setState] = useState({
-    ListItem: ''
+    caption: ''
   })
 
-  
 
   function handleChange(e){
     setState({
@@ -19,17 +17,22 @@ export default function AddListForm(props){
 
   function handleSubmit(e){
     e.preventDefault()
-             
-    const formData = new FormData()
-    formData.append('ListItem', state.ListItem)
-    props.handleAddList(formData)
+    const animeUrl = `https://api.jikan.moe/v3/search/anime?q=${state.caption}&order_by=title&limit=1`;
+    fetch(animeUrl)
+
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data, "this is data");
+      setState(data)  
+    })
+    const formData = new FormData(anime.results[0])
+    props.handleAddPost(formData)
     // Have to submit the form now! We need a function!
   }
 
 
   return (
-    
-  
+
         <Segment>
         
             <Form  autoComplete="off" onSubmit={handleSubmit}>
@@ -41,12 +44,12 @@ export default function AddListForm(props){
                   placeholder="What's your favorite Anime?"
                   onChange={handleChange}
                   required
-              />    
+              />   
               <Button
                 type="submit"
                 className="btn"
               >
-                ADD LIST
+                ADD ANIME
               </Button>
             </Form>
           </Segment>

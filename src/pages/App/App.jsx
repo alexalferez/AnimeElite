@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Redirect,Route, Switch } from 'react-router-dom';
+import React, {useState} from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import SignupPage from '../SignupPage/SignupPage';
 import LoginPage from '../LoginPage/LoginPage';
-import userService from '../../utils/userService'
 import ProfilePage from '../ProfilePage/ProfilePage'
+import userService from '../../utils/userService'
 import Feed from '../Feed/Feed';
 
 function App() {

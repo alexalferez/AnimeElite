@@ -5,10 +5,10 @@ const likesSchema = mongoose.Schema({
     userId: { type: mongoose.Schema.Types.ObjectId }
 })
 
-const listSchema = new mongoose. Schema({
+const postSchema = new mongoose. Schema({
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    ListItem: String,
+    caption: String,
     likes: [likesSchema]
 })
 
-module.exports = mongoose.model('List', listSchema)
+module.exports = mongoose.model('Post', postSchema)
