@@ -3,30 +3,22 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, Segment, Grid } from 'semantic-ui-react'
 
 export default function AddAnimeForm(props){
-  const [state, setState] = useState({
-    caption: ''
-  })
-
+  const [caption, setCaption] = useState([])
+  const [animeTilte, setAnimeTitle] = useState("")
 
   function handleChange(e){
-    setState({
-      ...state,
-      [e.target.name]: e.target.value
-    })
+    setAnimeTitle(e.target.value)
   }
 
-  function handleSubmit(e){
+   async function handleSubmit(e){
     e.preventDefault()
-    const animeUrl = `https://api.jikan.moe/v3/search/anime?q=${state.caption}&order_by=title&limit=1`;
-    fetch(animeUrl)
-
+    const animeUrl = `https://api.jikan.moe/v3/search/anime?q=${animeTilte}&order_by=title&limit=1`;
+    const anime = await fetch(animeUrl) 
     .then((res) => res.json())
-    .then((data) => {
-      console.log(data, "this is data");
-      setState(data)  
-    })
-    const formData = new FormData(anime.results[0])
-    props.handleAddPost(formData)
+    .then((data) => data)
+    props.handleAddPost(anime)
+    setCaption([...caption, {title: anime.results[0].title}])
+    
     // Have to submit the form now! We need a function!
   }
 
@@ -40,11 +32,11 @@ export default function AddAnimeForm(props){
               <Form.Input
                   className="form-control"
                   name="caption"
-                  value={state.caption}
-                  placeholder="What's your favorite Anime?"
+                  value={animeTilte}
+                  placeholder="What's your favorite Anime choice 1?"
                   onChange={handleChange}
                   required
-              />   
+              />
               <Button
                 type="submit"
                 className="btn"

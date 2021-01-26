@@ -4,7 +4,7 @@ const BASE_URL = '/api/posts'
 
 export function create(post){
     return fetch(BASE_URL, {
-        mehtod: 'POST',
+        method: 'POST',
         body: post,
         headers: {
             'Authorization': 'Bearer ' + tokenService.getToken()

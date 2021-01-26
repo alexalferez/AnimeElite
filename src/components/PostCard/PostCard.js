@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Icon, Image, Feed } from 'semantic-ui-react'
+import { Card, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function PostCard({post, isProfile, user, addLike, removeLike}) { 
@@ -10,10 +10,6 @@ function PostCard({post, isProfile, user, addLike, removeLike}) {
   const clickHandler = liked > -1 ?  () => removeLike(post.likes[liked]._id) : () => addLike(post._id)
   // lifting up our state in our clickHandler to our fucntion
   const likeColor = liked > -1 ? 'red' : 'grey';
-
-  // another way
-  // const liked = post.likes.filter(like => like.username === user.username);
-  // const clickHandler = liked.length > 0 ?  () => removeLike(liked._id) : () => addLike(post._id)
 
 
   return (

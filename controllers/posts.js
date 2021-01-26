@@ -2,22 +2,34 @@ const Post = require('../models/post');
 
 module.exports = {
     create,
+    index,
     deleteLike
 }
 
 async function create(req, res){
 
     try {
-        const post = await Post.findById(req.params.id);
-        post.likes.push({username: req.user.username, userId: req.user._id});
-        await post.save()
-        res.status(201).json({data: 'like added'})
+            const post = await Post.create({caption: req.body.caption, user: req.user});
+            const populatedUserPost = await post.populate('user').execPopulate();
+            res.status(201).json({post: populatedUserPost})
+
     } catch(err){
+        console.log(err)
         res.json({data: err})
     }
 }
 
+async function index(req, res){
+    try {
+        // this populates the user when you find the posts
+        // so you'll have access to the users information 
+        const posts = await Post.find({}).populate('user').exec()
+        res.status(200).json({posts})
+    } catch(err){
 
+    }
+
+}
 
 async function deleteLike(req, res) {
     try {
