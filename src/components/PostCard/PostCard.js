@@ -3,7 +3,7 @@ import { Card, Icon, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
 function PostCard({post, isProfile, user, addLike, removeLike}) { 
-
+console.log("<--- this is POST", post)
   // find if the user liked this post
   const liked = post.likes.findIndex(like => like.username === user.username);
   // Return the index of the user if the user has liked the post, if not liked will -1
@@ -17,20 +17,18 @@ function PostCard({post, isProfile, user, addLike, removeLike}) {
         :  
         <Link to={`/${user.username}`}>
           <Card.Content textAlign='left'>
-              <Image
-                  floated='left'
-                  size='large'
-                  avatar
-                  src={post.user}
-              />
               <Card.Header floated="right">{user.username}</Card.Header>
           </Card.Content>
         </Link>
       }
       <Card.Content>
-      <Card.Description>
-        {post.caption}
-      </Card.Description>
+        Title: {post.title}
+      </Card.Content>
+      <Card.Content>
+        Rating: {post.rated}
+      </Card.Content>
+      <Card.Content>
+        Synopsis: {post.synopsis}
       </Card.Content>
       <Card.Content extra textAlign={'right'}>
         <Icon name={'heart'} size='large' color={likeColor} onClick={clickHandler} />

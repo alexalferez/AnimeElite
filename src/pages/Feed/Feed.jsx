@@ -11,7 +11,7 @@ export default function Feed({user, handleLogout}){
     const [posts, setPosts] = useState([])
 
     async function handleAddPost(post){
-
+        console.log(post, "this is POST in HANDLE ADD POST")
         const data = await postsAPI.create(post);
 
         // to check to make sure this is working
@@ -28,14 +28,13 @@ export default function Feed({user, handleLogout}){
 
     // Maybe we need to call a funciton that gets all the posts
     async function getPosts(){
-    
         try {
           const data = await postsAPI.getAll();
           setPosts([...data.posts])
         } catch(err){
           console.log(err, ' this is the error')
         }
-      }
+    }
 
       async function addLike(postId){
         try {

@@ -7,9 +7,9 @@ module.exports = {
 }
 
 async function create(req, res){
-
+    console.log(req.body, "this is req.body<----")
     try {
-            const post = await Post.create({caption: req.body.caption, user: req.user});
+            const post = await Post.create({caption: req.body.caption, title: req.body.title, rating: req.body.rated, synopsis: req.body.synopsis, user: req.user});
             const populatedUserPost = await post.populate('user').execPopulate();
             res.status(201).json({post: populatedUserPost})
                 console.log(req.body.caption)
