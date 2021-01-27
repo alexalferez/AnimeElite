@@ -14,6 +14,8 @@ one you are signed up you can log out and log in
 
 Then to make Post of your Favorite Anime!!!!
 
+![](https://i.imgur.com/I0GqAQj.png)
+
 technologies used:
 React
 Jikan API
