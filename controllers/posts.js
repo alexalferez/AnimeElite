@@ -12,7 +12,7 @@ async function create(req, res){
             const post = await Post.create({caption: req.body.caption, user: req.user});
             const populatedUserPost = await post.populate('user').execPopulate();
             res.status(201).json({post: populatedUserPost})
-
+                console.log(req.body.caption)
     } catch(err){
         console.log(err)
         res.json({data: err})

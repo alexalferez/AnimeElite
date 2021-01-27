@@ -4,6 +4,7 @@ import { Header, Segment, Image, Icon } from 'semantic-ui-react';
 
 
 export default function PageHeader({user, handleLogout}){
+    
     return (
         <Segment clearing>
             <Header as='h2' floated='right'>

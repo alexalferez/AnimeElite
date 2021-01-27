@@ -22,9 +22,9 @@ export default function ProfilePage({ user, handleLogout }) {
 
             const username = location.pathname.substring(1)
             // This gets the username from the url! 
-            console.log(username)
+            console.log(username, "this username in PROFILE")
             const data = await userService.getProfile(username);
-            console.log(data)
+            console.log(data, "this is data in PROFILE")
             setLoading(() => false)
             setPosts(() => [...data.posts])
             setProfileUser(() => data.user)

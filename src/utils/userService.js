@@ -5,8 +5,8 @@ const BASE_URL = '/api/users/';
 function signup(user) {
   console.log(user)
   return fetch(BASE_URL + 'signup', {
-    headers: new Headers({'Content-Type': 'application/json'}),
     method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(user)
   })
   .then(res => {
@@ -16,8 +16,6 @@ function signup(user) {
   })
   // Parameter destructuring!
   .then(({token}) => tokenService.setToken(token));
-  // The above could have been written as
-  //.then((token) => token.token);
 }
 
 function getUser() {
@@ -29,9 +27,10 @@ function logout() {
 }
 
 function login(creds) {
+  console.log(creds, "<----- this is CREDS")
   return fetch(BASE_URL + 'login', {
-    headers: new Headers({'Content-Type': 'application/json'}),
     method: 'POST',
+    headers: new Headers({'Content-Type': 'application/json'}),
     body: JSON.stringify(creds)
   })
   .then(res => {

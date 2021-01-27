@@ -10,8 +10,7 @@ function PostCard({post, isProfile, user, addLike, removeLike}) {
   const clickHandler = liked > -1 ?  () => removeLike(post.likes[liked]._id) : () => addLike(post._id)
   // lifting up our state in our clickHandler to our fucntion
   const likeColor = liked > -1 ? 'red' : 'grey';
-
-
+  
   return (
     <Card key={post._id}>
      {isProfile ? ''
@@ -24,7 +23,7 @@ function PostCard({post, isProfile, user, addLike, removeLike}) {
                   avatar
                   src={post.user}
               />
-              <Card.Header floated="right">{post.user.username}</Card.Header>
+              <Card.Header floated="right">{user.username}</Card.Header>
           </Card.Content>
         </Link>
       }

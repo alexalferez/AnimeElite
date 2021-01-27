@@ -43,11 +43,11 @@ async function login(req, res) {
 }
 
 
-async function profile(req, res){
+async function profile(req, res) {
   try {
     const user = await User.findOneAndRemove({username: req.params.username})
-    const lists = await List.find({user: user._id});
-    res.status(200).json({lists: lists, user: user})
+    const posts = await Post.find({user: user._id});
+    res.status(200).json({posts: posts, user: user})
   } catch(err) {
     return res.status(401).json(err)
   }

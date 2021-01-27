@@ -15,7 +15,7 @@ export default function Feed({user, handleLogout}){
         const data = await postsAPI.create(post);
 
         // to check to make sure this is working
-        console.log(data, ' data')
+        console.log(data, ' data in FEED')
         // after this we'll want to update state
         // after we get back our new post
         // data is the response from our create function in controllers/posts
@@ -27,11 +27,11 @@ export default function Feed({user, handleLogout}){
     }
 
     // Maybe we need to call a funciton that gets all the posts
-    async function getPosts(post){
+    async function getPosts(){
     
         try {
           const data = await postsAPI.getAll();
-          setPosts([...data.post])
+          setPosts([...data.posts])
         } catch(err){
           console.log(err, ' this is the error')
         }
@@ -66,21 +66,21 @@ export default function Feed({user, handleLogout}){
 
     return (
         
-      <Grid centered >
+      <Grid centered>
         <Grid.Row>
-          <Grid.Column>
+            <Grid.Column>
             <PageHeader user={user} handleLogout={handleLogout}/>
-          </Grid.Column>
+            </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column style={{ maxWidth: 450 }}>
+            <Grid.Column style={{ maxWidth: 450 }}>
             <AddPostForm handleAddPost={handleAddPost}/>
-          </Grid.Column>
+            </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-        <Grid.Column style={{maxWidth: 450}}>
-          <PostFeed posts={posts} isProfile={false} numPhotosCol={1} user={user} addLike={addLike} removeLike={removeLike}/>
-        </Grid.Column>
+            <Grid.Column style={{maxWidth: 450}}>
+            <PostFeed posts={posts} isProfile={false} numPhotosCol={1} user={user} addLike={addLike} removeLike={removeLike}/>
+            </Grid.Column>
         </Grid.Row>
       </Grid>
     )
