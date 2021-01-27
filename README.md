@@ -15,4 +15,4 @@ one you are signed up you can log out and log in
 Then to make Post of your Favorite Anime!!!!
 
 
-[Click here](https://git.heroku.com/animeelite.git)
+[Click here](https://animeelite.herokuapp.com/)
